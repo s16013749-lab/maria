@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Aurelle — организация свадеб, оформление и координация вашего особенного дня."
+  >
+
+  <title>AURELLE — Weddings & Events</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body id="top">
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="#top">AURELLE</a>
+
+      <nav class="nav" aria-label="Navigation">
+        <a href="#stages" data-i18n="navStages">Этапы</a>
+        <a href="#services" data-i18n="navServices">Услуги</a>
+        <a href="#countdown" data-i18n="navDate">До свадьбы</a>
+        <a href="#contacts" data-i18n="navContacts">Контакты</a>
+      </nav>
+
+      <button
+        id="languageButton"
+        class="language-button"
+        type="button"
+      >
+        English
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Главный экран -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Weddings & Events</p>
+
+        <h1 data-i18n="heroTitle">
+          Искусство создавать ваш особенный день
+        </h1>
+
+        <p class="hero-description" data-i18n="heroText">
+          Вы наслаждаетесь моментом — мы заботимся о деталях.
+        </p>
+
+        <a class="btn" href="#contacts" data-i18n="discuss">
+          Обсудить свадьбу
+        </a>
+      </div>
+    </section>
+
+    <!-- Этапы подготовки -->
+    <section id="stages" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Aurelle</p>
+          <h2 data-i18n="stagesTitle">Путь к вашему торжеству</h2>
+        </div>
+
+        <div id="stagesGrid" class="cards-grid"></div>
+      </div>
+    </section>
+
+    <!-- Услуги, поиск и фильтры -->
+    <section id="services" class="section tinted">
+      <div class="container">
+        <div class="section-heading">
+          <h2 data-i18n="servicesTitle">Наши услуги</h2>
+
+          <p data-i18n="servicesText">
+            Выберите формат сопровождения вашей свадьбы.
+          </p>
+        </div>
+
+        <div class="filter-panel">
+          <label for="serviceSearch" data-i18n="searchLabel">
+            Поиск услуг
+          </label>
+
+          <input
+            id="serviceSearch"
+            type="search"
+            data-placeholder="searchPlaceholder"
+            placeholder="Название или описание услуги"
+          >
+
+          <div
+            class="filter-buttons"
+            role="group"
+            aria-label="Service categories"
+          >
+            <button
+              class="filter-button active"
+              type="button"
+              data-filter="all"
+              data-i18n="all"
+              aria-pressed="true"
+            >
+              Все
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="planning"
+              data-i18n="planning"
+              aria-pressed="false"
+            >
+              Организация
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="design"
+              data-i18n="design"
+              aria-pressed="false"
+            >
+              Оформление
+            </button>
+          </div>
+        </div>
+
+        <div id="servicesGrid" class="cards-grid"></div>
+
+        <p
+          id="emptyResults"
+          class="empty-message"
+          role="status"
+          hidden
+        ></p>
+      </div>
+    </section>
+
+    <!-- Обратный отсчёт -->
+    <section id="countdown" class="section countdown-section">
+      <div class="container">
+        <h2 data-i18n="countdownTitle">До свадьбы осталось</h2>
+
+        <div class="countdown-grid">
+          <div class="time-box">
+            <span id="days">00</span>
+            <small data-i18n="days">дней</small>
+          </div>
+
+          <div class="time-box">
+            <span id="hours">00</span>
+            <small data-i18n="hours">часов</small>
+          </div>
+
+          <div class="time-box">
+            <span id="minutes">00</span>
+            <small data-i18n="minutes">минут</small>
+          </div>
+
+          <div class="time-box">
+            <span id="seconds">00</span>
+            <small data-i18n="seconds">секунд</small>
+          </div>
+        </div>
+
+        <form id="dateForm" class="date-form" novalidate>
+          <label for="eventDate" data-i18n="dateTime">
+            Дата и время свадьбы
+          </label>
+
+          <input
+            id="eventDate"
+            name="eventDate"
+            type="datetime-local"
+            required
+          >
+
+          <div class="actions">
+            <button class="btn" type="submit" data-i18n="start">
+              Начать отсчёт
+            </button>
+
+            <button
+              id="resetDate"
+              class="btn btn-outline"
+              type="button"
+              data-i18n="reset"
+            >
+              Сбросить
+            </button>
+          </div>
+        </form>
+
+        <p class="note" data-i18n="timezone">
+          Используется часовой пояс вашего устройства.
+        </p>
+
+        <p id="dateMessage" class="status" role="status"></p>
+      </div>
+    </section>
+
+    <!-- Слайдер -->
+    <section class="section tinted">
+      <div class="container slider-container">
+        <div class="section-heading">
+          <h2 data-i18n="sliderTitle">Ваша свадьба — ваш стиль</h2>
+        </div>
+
+        <div
+          class="slider"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Wedding styles"
+        >
+          <div id="slideContent" aria-live="polite"></div>
+
+          <div class="slider-controls">
+            <button
+              id="previousSlide"
+              class="round-button"
+              type="button"
+              aria-label="Предыдущий слайд"
+            >
+              ←
+            </button>
+
+            <span id="slideCounter"></span>
+
+            <button
+              id="nextSlide"
+              class="round-button"
+              type="button"
+              aria-label="Следующий слайд"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts" class="section">
+    <div class="container">
+      <div class="contacts-grid">
+        <div>
+          <p class="eyebrow">Aurelle</p>
+
+          <h2 data-i18n="contactTitle">Начнём вашу историю</h2>
+
+          <p class="contact-intro" data-i18n="contactText">
+            Расскажите о вашей дате, количестве гостей и пожеланиях —
+            мы предложим решение.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <span data-i18n="contactPhoneLabel">Телефон:</span>
+              <a href="tel:+79000000000">
+                +7 900 000-00-00
+              </a>
+            </li>
+
+            <li>
+              <span data-i18n="contactEmailLabel">Почта:</span>
+              <a href="mailto:hello@loveevent.ru">
+                AURELLEloveevent@gmail.com
+              </a>
+            </li>
+
+            <li>
+              <span data-i18n="contactAddressLabel">Адрес:</span>
+              <span data-i18n="contactAddress">
+                г. Улан-Удз, ул. Советская, 23
+              </span>
+            </li>
+
+            <li>
+              <span data-i18n="contactHoursLabel">Часы работы:</span>
+              <span data-i18n="contactHours">
+                Ежедневно с 10:00 до 20:00
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <form
+          id="contactForm"
+          name="wedding-contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="contact-form"
+          novalidate
+        >
+          <input
+            type="hidden"
+            name="form-name"
+            value="wedding-contact"
+          >
+
+          <p hidden>
+            <label>
+              Leave this empty:
+              <input
+                name="bot-field"
+                tabindex="-1"
+                autocomplete="off"
+              >
+            </label>
+          </p>
+
+          <h3 data-i18n="formTitle">Заявка на консультацию</h3>
+
+          <label for="clientName" data-i18n="name">
+            Ваше имя
+          </label>
+
+          <input
+            id="clientName"
+            name="name"
+            type="text"
+            autocomplete="name"
+            minlength="2"
+            maxlength="80"
+            required
+          >
+
+          <label for="clientPhone" data-i18n="phone">
+            Телефон
+          </label>
+
+          <input
+            id="clientPhone"
+            name="phone"
+            type="tel"
+            autocomplete="tel"
+            required
+          >
+
+          <label for="clientDate" data-i18n="weddingDate">
+            Дата свадьбы
+          </label>
+
+          <input
+            id="clientDate"
+            name="date"
+            type="date"
+            required
+          >
+
+          <label for="clientMessage" data-i18n="wishes">
+            Ваши пожелания
+          </label>
+
+          <textarea
+            id="clientMessage"
+            name="message"
+            rows="4"
+            maxlength="1000"
+          ></textarea>
+
+          <button
+            id="submitContact"
+            class="btn"
+            type="submit"
+            data-i18n="send"
+          >
+            Отправить заявку
+          </button>
+
+          <p id="formMessage" class="status" role="status"></p>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <a class="logo" href="#top">AURELLE</a>
+        <p>© AURELLE · Weddings & Events</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Кнопка возврата наверх -->
+  <a id="backToTop" class="back-to-top" href="#top" hidden>
+    <span data-i18n="top">Наверх ↑</span>
+  </a>
+
+  <!-- Модальное окно услуги -->
+  <dialog id="serviceDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-content">
+      <button
+        id="closeDialog"
+        class="dialog-close"
+        type="button"
+      >
+        <span data-i18n="close">Закрыть</span> ×
+      </button>
+
+      <h2 id="dialogTitle"></h2>
+      <p id="dialogDescription"></p>
+      <p id="dialogPrice" class="price"></p>
+
+      <button
+        id="dialogContact"
+        class="btn"
+        type="button"
+        data-i18n="discuss"
+      >
+        Обсудить свадьбу
+      </button>
+    </div>
+  </dialog>
+</body>
+</html>
